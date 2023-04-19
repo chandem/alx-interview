@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 def pascal_triangle(n):
   # Base case 
   if n <= 0:
@@ -23,3 +24,4 @@ def pascal_triangle(n):
     triangle.append(row)
 
   return triangle
+
