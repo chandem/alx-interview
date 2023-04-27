@@ -20,11 +20,3 @@ def canUnlockAll(boxes):
         if not new_keys:
             break
     return all(opened)
-
-
-
-
-
-
-
-
