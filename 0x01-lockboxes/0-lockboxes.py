@@ -1,40 +1,24 @@
 #!/usr/bin/python3
 def canUnlockAll(boxes):
+    n = len(boxes)
+    opened = [False] * n
+    opened[0] = True
+    keys = boxes[0]
+    for key in keys:
+        if key < n:
+            opened[key] = True
+            keys += boxes[key]
+    while True:
+        new_keys = False
+        for i in range(n):
+            if opened[i]:
+                keys = boxes[i]
+                for key in keys:
+                    if key < n and not opened[key]:
+                        opened[key] = True
+                        new_keys = True
+        if not new_keys:
+            break
+    return all(opened)
 
-    # Initialize a set to store the keys we have
 
-    keys = set(boxes[0])
-
-    # Initialize a set to store the opened boxes
-
-    opened_boxes = {0}
-
-    # Keep track of the number of boxes we've opened
-
-    num_opened_boxes = 1
-
-    # While we have keys and there are still unopened boxes
-
-    while keys and num_opened_boxes < len(boxes):
-
-        # Try to open a new box with the keys we have
-
-        new_keys = set()
-
-        for key in keys:
-
-            if key < len(boxes) and key not in opened_boxes:
-
-                opened_boxes.add(key)
-
-                new_keys.update(boxes[key])
-
-                num_opened_boxes += 1
-
-        # Update the keys we have
-
-        keys = new_keys
-
-    # Return True if all boxes are opened, else return False
-
-    return num_opened_boxes == len(boxes)
