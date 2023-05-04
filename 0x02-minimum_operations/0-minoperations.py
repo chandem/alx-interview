@@ -1,4 +1,4 @@
-
+#!/usr/bin/python3
 
 def minOperations(n):
 
@@ -36,4 +36,3 @@ def minOperations(n):
 
     return 0
 
-Copy All => Paste => HH => Paste =>HHH => Copy All => Paste => HHHHHH => Paste => HHHHHHHHH
