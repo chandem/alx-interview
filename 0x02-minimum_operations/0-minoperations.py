@@ -103,5 +103,3 @@ def minOperations(n):
     else:
 
         return 0
-
-
