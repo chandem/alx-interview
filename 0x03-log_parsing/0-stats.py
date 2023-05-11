@@ -1,64 +1,61 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
+
+'''a script that reads stdin line by line and computes metrics'''
 
 import sys
 
-# Initialize variables
+cache = {'200': 0, '301': 0, '400': 0, '401': 0,
+
+         '403': 0, '404': 0, '405': 0, '500': 0}
 
 total_size = 0
 
-status_codes = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
+counter = 0
 
-line_count = 0
+try:
 
-# Read stdin line by line
+    for line in sys.stdin:
 
-for line in sys.stdin:
+        line_list = line.split(" ")
 
-    try:
+        if len(line_list) > 4:
 
-        # Parse line
+            code = line_list[-2]
 
-        ip, _, _, _, _, status_code, file_size = line.split()
+            size = int(line_list[-1])
 
-        # Convert status code and file size to integers
+            if code in cache.keys():
 
-        status_code = int(status_code)
+                cache[code] += 1
 
-        file_size = int(file_size)
+            total_size += size
 
-        # Update metrics
+            counter += 1
 
-        total_size += file_size
+        if counter == 10:
 
-        status_codes[status_code] += 1
+            counter = 0
 
-        line_count += 1
+            print('File size: {}'.format(total_size))
 
-        # Print metrics every 10 lines or on keyboard interrupt
+            for key, value in sorted(cache.items()):
 
-        if line_count % 10 == 0:
+                if value != 0:
 
-            print("Total file size: File size: {}".format(total_size))
+                    print('{}: {}'.format(key, value))
 
-            for code in sorted(status_codes.keys()):
+except Exception as err:
 
-                if status_codes[code] > 0:
+    pass
 
-                    print("{}: {}".format(code, status_codes[code]))
+finally:
 
-    except ValueError:
+    print('File size: {}'.format(total_size))
 
-        # Skip line if it doesn't match expected format
+    for key, value in sorted(cache.items()):
 
-        continue
+        if value != 0:
 
-# Print final metrics
+            print('{}: {}'.format(key, value))
 
-print("Total file size: File size: {}".format(total_size))
-
-for code in sorted(status_codes.keys()):
-
-    if status_codes[code] > 0:
-
-        print("{}: {}".format(code, status_codes[code]))
 
