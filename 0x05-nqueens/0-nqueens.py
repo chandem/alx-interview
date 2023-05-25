@@ -36,5 +36,4 @@ if n < 4:
     sys.exit(1)
 
 Board = [-1 for i in range(n)]
-Fill_line(Board, 0)
- 
+Fill_line(Board, 0) 
