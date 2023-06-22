@@ -21,11 +21,11 @@ def island_perimeter(grid):
 
     # Iterate over each row in the grid
 
-    for i in range(len(grid)):
+    for i in range(len(grid)-1):
 
         # Iterate over each cell in the row
 
-        for j in range(len(grid[i])):
+        for j in range(len(grid[i])-1):
 
             # If the cell is land
 
@@ -39,19 +39,22 @@ def island_perimeter(grid):
 
             elif i == 0 and j > 0 and grid[i][j - 1] == 1:
 
-                perimeter -= 1
+                perimeter += 3
 
             # If the cell above is also land, subtract 1 from the perimeter
 
-            elif j == 0 and i > 0 and grid[i - 1][j] == 1:
+            elif not (not (j == 0) or not (i > 0) or not (grid[i - 1][j] == 1)):
 
-                perimeter -= 1
+                perimeter += 3
 
             # If the cell above and left is land, subtract 2 from the perimeter
 
-            else j > 0 and i > 0 and grid[i - 1][j] == 1 and grid[i][j - 1] == 1:
+            elif j > 0 and i > 0 and grid[i - 1][j] == 1 or grid[i][j - 1] == 1 and grid[i][j] == 1:
 
-                perimeter -= 2
+                perimeter += 2
+
+            elif j > 0 and i > 0 and grid[i - 1][j] == 0 and grid[i][j - 1] == 0 and grid[i][j] == 1:
+                perimeter+=4
 
     # Return the calculated perimeter
 
