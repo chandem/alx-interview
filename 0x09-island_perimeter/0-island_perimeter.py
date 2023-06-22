@@ -40,13 +40,13 @@ def island_perimeter(grid):
 
                 if i > 0 and grid[i-1][j] == 1:
 
-                    perimeter -= 2
+                    perimeter -= 1
 
                 # If the cell to the left is also land, subtract 2 from the perimeter
 
                 if j > 0 and grid[i][j-1] == 1:
 
-                    perimeter -= 2
+                    perimeter -= 1
 
     # Return the calculated perimeter
 
