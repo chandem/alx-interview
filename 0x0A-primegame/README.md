@@ -1,1 +1,2 @@
-Readme
+# Alx interview prime game
+___________
